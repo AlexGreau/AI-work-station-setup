@@ -1,0 +1,14 @@
+// Zed settings for Windows workstations (installed by install.ps1).
+// Edit here, commit, and re-run the installer on each machine.
+{
+  "terminal": {
+    "shell": {
+      "with_arguments": {
+        "program": "C:\\Program Files\\Git\\bin\\bash.exe",
+        "args": ["--login", "-i"]
+      }
+    }
+  }
+  // To use WSL instead, replace the "shell" block with:
+  //   "shell": { "program": "wsl.exe" }
+}

@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "ponytail": { "source": { "source": "github", "repo": "DietrichGebert/ponytail" } },
+    "pstack-claude": { "source": { "source": "github", "repo": "michael-denyer/pstack-claude" } },
+    "googlechrome": { "source": { "source": "github", "repo": "GoogleChrome/modern-web-guidance" } }
+  },
+  "enabledPlugins": {
+    "ponytail@ponytail": true,
+    "pstack@pstack-claude": true,
+    "modern-web-guidance@googlechrome": true,
+    "frontend-design@anthropic-plugin-directory": true,
+    "skill-creator@anthropic-plugin-directory": true
+  }
+}

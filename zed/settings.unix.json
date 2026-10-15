@@ -1,0 +1,7 @@
+// Zed settings for macOS / Linux workstations (installed by install.sh).
+// Edit here, commit, and re-run the installer on each machine.
+{
+  "terminal": {
+    "shell": "system"
+  }
+}
