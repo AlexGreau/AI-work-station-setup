@@ -29,6 +29,7 @@ fi
 mkdir -p "$SKILLS_TARGET"
 
 for skill in "$REPO_DIR"/skills/*/; do
+  [[ -d "$skill" ]] || continue  # no skills yet: the glob stays literal
   name="$(basename "$skill")"
   rm -rf "${SKILLS_TARGET:?}/$name"
   cp -R "$skill" "$SKILLS_TARGET/$name"

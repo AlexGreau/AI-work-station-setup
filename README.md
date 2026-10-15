@@ -19,7 +19,7 @@ First install Claude Code: `irm https://claude.ai/install.ps1 | iex` (Windows Po
 **Windows (PowerShell):**
 
 ```powershell
-git clone <this-repo-url> AI-work-station-setup
+git clone https://github.com/AlexGreau/AI-work-station-setup.git AI-work-station-setup
 cd AI-work-station-setup
 .\install.ps1
 ```
@@ -29,7 +29,7 @@ If PowerShell blocks the script, run `Set-ExecutionPolicy -Scope CurrentUser Rem
 **macOS / Linux / WSL:**
 
 ```bash
-git clone <this-repo-url> AI-work-station-setup
+git clone https://github.com/AlexGreau/AI-work-station-setup.git AI-work-station-setup
 cd AI-work-station-setup
 ./install.sh
 ```
@@ -71,7 +71,7 @@ git pull
 
 | Skill | Invoke with | Source |
 | ----- | ----------- | ------ |
-| thermo-nuclear-code-quality-review | `/thermo-nuclear-code-quality-review` (manual only) | [cursor/plugins](https://github.com/cursor/plugins/tree/main/cursor-team-kit/skills/thermo-nuclear-code-quality-review) |
+| _none yet_ | | |
 
 ## Curated plugins
 
