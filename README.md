@@ -6,7 +6,7 @@ My Claude Code + Zed setup: my own skills plus a curated list of third-party plu
 
 ```
 skills/                 Claude Code skills, mine plus selected third-party ones (one folder per skill, each with a SKILL.md)
-claude/plugins.json     Curated third-party plugins, merged into ~/.claude/settings.json
+claude/settings.json    Claude Code settings (model, tui, theme) and curated plugins, merged into ~/.claude/settings.json
 zed/settings.*.json     Zed editor settings (Git Bash terminal on Windows)
 install.ps1             Installer for Windows (PowerShell)
 install.sh              Installer for macOS / Linux / WSL
@@ -71,13 +71,14 @@ git pull
 
 | Skill | Invoke with | Source |
 | ----- | ----------- | ------ |
+| commit-style | Model-invoked on every commit: `feat/fix/chore/docs/style: <≤10 words>`, no AI attribution | mine |
 | grill-me | /grill-me | [mattpocock/skills](https://github.com/mattpocock/skills) |
 | grilling | Model-invoked, called by grill-me | [mattpocock/skills](https://github.com/mattpocock/skills) |
 | doubt-driven-development | Model-invoked, for non-trivial decisions | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) |
 
 ## Curated plugins
 
-Listed in `claude/plugins.json`. Claude Code installs them the next time it starts. To add one, put its marketplace under `extraKnownMarketplaces` and `"<plugin>@<marketplace>": true` under `enabledPlugins`, then re-run the installer. On macOS/Linux the merge needs `jq`.
+Listed in `claude/settings.json`. Claude Code installs them the next time it starts. To add one, put its marketplace under `extraKnownMarketplaces` and `"<plugin>@<marketplace>": true` under `enabledPlugins`, then re-run the installer. On macOS/Linux the merge needs `jq`.
 
 | Plugin | What it does | Source |
 | ------ | ------------ | ------ |

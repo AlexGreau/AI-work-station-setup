@@ -37,17 +37,17 @@ for skill in "$REPO_DIR"/skills/*/; do
 done
 echo "Skills installed to $SKILLS_TARGET"
 
-# --- Plugins (merged into ~/.claude/settings.json; Claude installs them on next start) ---
+# --- Settings + plugins (merged into ~/.claude/settings.json; Claude installs plugins on next start) ---
 CLAUDE_SETTINGS="$HOME/.claude/settings.json"
 if command -v jq >/dev/null; then
   mkdir -p "$HOME/.claude"
   [[ -f "$CLAUDE_SETTINGS" ]] || echo '{}' > "$CLAUDE_SETTINGS"
   cp "$CLAUDE_SETTINGS" "$CLAUDE_SETTINGS.bak-$(date +%Y%m%d-%H%M%S)"
-  jq -s '.[0] * .[1]' "$CLAUDE_SETTINGS" "$REPO_DIR/claude/plugins.json" > "$CLAUDE_SETTINGS.tmp"
+  jq -s '.[0] * .[1]' "$CLAUDE_SETTINGS" "$REPO_DIR/claude/settings.json" > "$CLAUDE_SETTINGS.tmp"
   mv "$CLAUDE_SETTINGS.tmp" "$CLAUDE_SETTINGS"
-  echo "Plugins added to $CLAUDE_SETTINGS"
+  echo "Settings and plugins merged into $CLAUDE_SETTINGS"
 else
-  echo "jq not found: skipped plugins. Install jq and re-run, or add them by hand (see README)." >&2
+  echo "jq not found: skipped settings and plugins. Install jq and re-run, or add them by hand (see README)." >&2
 fi
 
 # --- Zed settings ---------------------------------------------------------

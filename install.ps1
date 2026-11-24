@@ -31,9 +31,9 @@ Get-ChildItem (Join-Path $RepoDir "skills") -Directory | ForEach-Object {
 }
 Write-Host "Skills installed to $SkillsTarget"
 
-# --- Plugins (merged into ~/.claude/settings.json; Claude installs them on next start) ---
+# --- Settings + plugins (merged into ~/.claude/settings.json; Claude installs plugins on next start) ---
 $ClaudeSettings = Join-Path $HOME ".claude\settings.json"
-$plugins = Get-Content -Raw (Join-Path $RepoDir "claude\plugins.json") | ConvertFrom-Json
+$repoSettings = Get-Content -Raw (Join-Path $RepoDir "claude\settings.json") | ConvertFrom-Json
 if (Test-Path $ClaudeSettings) {
     Copy-Item $ClaudeSettings "$ClaudeSettings.bak-$(Get-Date -Format yyyyMMdd-HHmmss)"
     $settings = Get-Content -Raw $ClaudeSettings | ConvertFrom-Json
@@ -41,15 +41,19 @@ if (Test-Path $ClaudeSettings) {
     New-Item -ItemType Directory -Force (Split-Path $ClaudeSettings) | Out-Null
     $settings = [pscustomobject]@{}
 }
-foreach ($key in "extraKnownMarketplaces", "enabledPlugins") {
-    if (-not $settings.$key) { $settings | Add-Member -NotePropertyName $key -NotePropertyValue ([pscustomobject]@{}) -Force }
-    foreach ($p in $plugins.$key.PSObject.Properties) {
-        $settings.$key | Add-Member -NotePropertyName $p.Name -NotePropertyValue $p.Value -Force
+# Objects (enabledPlugins, extraKnownMarketplaces) merge one level deep; plain values overwrite.
+foreach ($p in $repoSettings.PSObject.Properties) {
+    if ($p.Value -is [pscustomobject] -and $settings.($p.Name) -is [pscustomobject]) {
+        foreach ($sub in $p.Value.PSObject.Properties) {
+            $settings.($p.Name) | Add-Member -NotePropertyName $sub.Name -NotePropertyValue $sub.Value -Force
+        }
+    } else {
+        $settings | Add-Member -NotePropertyName $p.Name -NotePropertyValue $p.Value -Force
     }
 }
 # WriteAllText: PS 5.1 Set-Content -Encoding utf8 adds a BOM
 [IO.File]::WriteAllText($ClaudeSettings, ($settings | ConvertTo-Json -Depth 20))
-Write-Host "Plugins added to $ClaudeSettings"
+Write-Host "Settings and plugins merged into $ClaudeSettings"
 
 # --- Zed settings ---------------------------------------------------------
 if (-not $SkipZed) {
