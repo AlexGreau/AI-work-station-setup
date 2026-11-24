@@ -5,7 +5,7 @@ My Claude Code + Zed setup: my own skills plus a curated list of third-party plu
 ## What's in here
 
 ```
-skills/                 My own Claude Code skills (one folder per skill, each with a SKILL.md)
+skills/                 Claude Code skills, mine plus selected third-party ones (one folder per skill, each with a SKILL.md)
 claude/plugins.json     Curated third-party plugins, merged into ~/.claude/settings.json
 zed/settings.*.json     Zed editor settings (Git Bash terminal on Windows)
 install.ps1             Installer for Windows (PowerShell)
@@ -71,7 +71,9 @@ git pull
 
 | Skill | Invoke with | Source |
 | ----- | ----------- | ------ |
-| _none yet_ | | |
+| grill-me | /grill-me | [mattpocock/skills](https://github.com/mattpocock/skills) |
+| grilling | Model-invoked, called by grill-me | [mattpocock/skills](https://github.com/mattpocock/skills) |
+| doubt-driven-development | Model-invoked, for non-trivial decisions | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) |
 
 ## Curated plugins
 
